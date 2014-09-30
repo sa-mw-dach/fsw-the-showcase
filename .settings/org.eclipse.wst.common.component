@@ -2,9 +2,10 @@
     <wb-module deploy-name="samples-jbossas-ordermgmt-app">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <property name="context-root" value="ordermgmt"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/samples-jbossas-ordermgmt-app/target/classes"/>
-        <property name="component.inclusion.patterns" value="WEB-INF/lib/ip-loader*.jar,WEB-INF/lib/epn-loader*.jar,WEB-INF/lib/reports-loader*.jar"/>
-        <property name="component.exclusion.patterns" value="WEB-INF/lib/*.jar,WEB-INF/classes/META-INF/switchyard.xml"/>
+        <property name="context-root" value="ordermgmt.jar"/>
+        <property name="component.inclusion.patterns"/>
+        <property name="component.exclusion.patterns" value="%regex[WEB-INF/lib/(?!.*-loader-jee).*.jar],WEB-INF/classes/META-INF/switchyard.xml"/>
     </wb-module>
 </project-modules>
