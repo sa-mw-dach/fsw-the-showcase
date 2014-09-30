@@ -76,14 +76,14 @@
     </sca:service>
     <sca:service name="simpleCorrelationService" promote="simpleCorrelationService/simpleCorrelationService">
       <_1_1:binding.soap>
-        <_1_1:wsdl>HelloGoodbye.wsdl</_1_1:wsdl>
+        <_1_1:wsdl>bpel-demo/HelloGoodbye.wsdl</_1_1:wsdl>
         <_1_1:socketAddr>:18001</_1_1:socketAddr>
       </_1_1:binding.soap>
     </sca:service>
     <sca:component name="simpleCorrelationService">
       <sca:implementation.bpel process="sh:HelloGoodbye"/>
       <sca:service name="simpleCorrelationService">
-        <sca:interface.wsdl interface="HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
+        <sca:interface.wsdl interface="bpel-demo/HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
       </sca:service>
     </sca:component>
   </sca:composite>

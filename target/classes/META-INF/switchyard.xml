@@ -1,101 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<_1:switchyard xmlns:_1="urn:switchyard-config:switchyard:1.1" xmlns:_1_1="urn:switchyard-component-soap:config:1.1" xmlns:_2="urn:switchyard-component-bean:config:1.1" xmlns:_3="urn:switchyard-config:transform:1.1" xmlns:bpm="urn:switchyard-component-bpm:config:1.1" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:services="urn:switchyard-quickstart-demo:orders:0.1.0" xmlns:sh="http://www.jboss.org/bpel/examples" name="orders" targetNamespace="urn:switchyard-quickstart-demo:orders:0.1.0">
-  <sca:composite name="samples-jbossas-ordermgmt-app" targetNamespace="urn:switchyard-quickstart-demo:orders:0.1.0">
-    <sca:service name="OrderService" promote="OrderService/OrderService">
-      <sca:interface.wsdl interface="wsdl/OrderService.wsdl#wsdl.porttype(OrderService)"/>
-      <_1_1:binding.soap>
-        <_1_1:wsdl>wsdl/OrderService.wsdl</_1_1:wsdl>
-        <_1_1:socketAddr>:18001</_1_1:socketAddr>
-        <_1_1:contextPath>demo-orders</_1_1:contextPath>
-      </_1_1:binding.soap>
-    </sca:service>
-    <sca:component name="OrderService">
-      <_2:implementation.bean requires="managedTransaction.Global" class="org.overlord.rtgov.quickstarts.demos.orders.OrderServiceBean"/>
-      <sca:service name="OrderService" requires="propagatesTransaction">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderService"/>
-      </sca:service>
-      <sca:reference name="InventoryService">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.InventoryService"/>
-      </sca:reference>
-      <sca:reference name="LogisticsService">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.LogisticsService"/>
-      </sca:reference>
-    </sca:component>
-    <sca:component name="LogisticsService">
-      <_2:implementation.bean requires="managedTransaction.Global" class="org.overlord.rtgov.quickstarts.demos.orders.LogisticsServiceBean"/>
-      <sca:service name="LogisticsService" requires="propagatesTransaction">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.LogisticsService"/>
-      </sca:service>
-    </sca:component>
-    <sca:component name="InventoryService">
-      <_2:implementation.bean requires="managedTransaction.Global" class="org.overlord.rtgov.quickstarts.demos.orders.InventoryServiceBean"/>
-      <sca:service name="InventoryService" requires="propagatesTransaction">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.InventoryService"/>
-      </sca:service>
-    </sca:component>
-    <sca:component name="OrderProcess">
-      <bpm:implementation.bpm requires="managedTransaction.Global" persistent="true" processId="OrderProcess">
-        <bpm:manifest>
-          <bpm:resources>
-            <bpm:resource location="OrderProcess.bpmn2" type="BPMN2"/>
-          </bpm:resources>
-        </bpm:manifest>
-        <bpm:operations>
-          <bpm:operation name="start" type="START_PROCESS">
-            <bpm:outputs/>
-          </bpm:operation>
-        </bpm:operations>
-        <bpm:userGroupCallback class="org.overlord.rtgov.quickstarts.demos.bpm.BPMUserGroupCallback"/>
-      </bpm:implementation.bpm>
-      <sca:service name="OrderProcess" requires="propagatesTransaction">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderProcess"/>
-      </sca:service>
-      <sca:reference name="OrderService">
-        <sca:interface.wsdl interface="wsdl/OrderService.wsdl#wsdl.porttype(OrderService)"/>
-      </sca:reference>
-    </sca:component>
-    <sca:service name="OrderProcessREST" promote="OrderProcess/OrderProcess">
-      <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderProcess"/>
-      <resteasy:binding.rest name="order-process">
-        <resteasy:interfaces>org.overlord.rtgov.quickstarts.demos.orders.OrderProcess</resteasy:interfaces>
-        <resteasy:contextPath>orders</resteasy:contextPath>
-      </resteasy:binding.rest>
-    </sca:service>
-    <sca:component name="BPMISBean">
-      <_2:implementation.bean class="org.overlord.rtgov.quickstarts.demos.bpm.BPMISBean"/>
-      <sca:service name="BPMIS">
-        <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.bpm.BPMIS"/>
-      </sca:service>
-    </sca:component>
-    <sca:service name="BPMIS" promote="BPMISBean/BPMIS">
-      <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.bpm.BPMIS"/>
-      <resteasy:binding.rest name="BPMIS">
-        <resteasy:interfaces>org.overlord.rtgov.quickstarts.demos.bpm.BPMREST</resteasy:interfaces>
-        <resteasy:contextPath>bpm-rest</resteasy:contextPath>
-      </resteasy:binding.rest>
-    </sca:service>
-    <sca:service name="simpleCorrelationService" promote="simpleCorrelationService/simpleCorrelationService">
-      <_1_1:binding.soap>
-        <_1_1:wsdl>HelloGoodbye.wsdl</_1_1:wsdl>
-        <_1_1:socketAddr>:18001</_1_1:socketAddr>
-      </_1_1:binding.soap>
-    </sca:service>
-    <sca:component name="simpleCorrelationService">
-      <sca:implementation.bpel process="sh:HelloGoodbye"/>
-      <sca:service name="simpleCorrelationService">
-        <sca:interface.wsdl interface="HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
-      </sca:service>
-    </sca:component>
-  </sca:composite>
-  <_1:transforms>
-    <_3:transform.java from="java:org.overlord.rtgov.quickstarts.demos.orders.OrderAck" to="{urn:switchyard-quickstart-demo:orders:1.0}submitOrderResponse" class="org.overlord.rtgov.quickstarts.demos.orders.Transformers"/>
-    <_3:transform.java from="java:org.overlord.rtgov.quickstarts.demos.orders.Receipt" to="{urn:switchyard-quickstart-demo:orders:1.0}makePaymentResponse" class="org.overlord.rtgov.quickstarts.demos.orders.Transformers"/>
-    <_3:transform.java from="{urn:switchyard-quickstart-demo:orders:1.0}makePayment" to="java:org.overlord.rtgov.quickstarts.demos.orders.Payment" class="org.overlord.rtgov.quickstarts.demos.orders.Transformers"/>
-    <_3:transform.java from="{urn:switchyard-quickstart-demo:orders:1.0}submitOrder" to="java:org.overlord.rtgov.quickstarts.demos.orders.Order" class="org.overlord.rtgov.quickstarts.demos.orders.Transformers"/>
-  </_1:transforms>
-  <_1:domain>
-    <_1:properties>
-      <_1:property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
-    </_1:properties>
-  </_1:domain>
+<?xml version="1.0" encoding="UTF-8"?><_1:switchyard xmlns:_1="urn:switchyard-config:switchyard:1.1" xmlns:_1_1="urn:switchyard-component-soap:config:1.1" xmlns:_2="urn:switchyard-component-bean:config:1.1" xmlns:_3="urn:switchyard-config:transform:1.1" xmlns:bpm="urn:switchyard-component-bpm:config:1.1" xmlns:resteasy="urn:switchyard-component-resteasy:config:1.1" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:services="urn:switchyard-quickstart-demo:orders:0.1.0" xmlns:sh="http://www.jboss.org/bpel/examples" name="orders" targetNamespace="urn:switchyard-quickstart-demo:orders:0.1.0">
+    <sca:composite name="samples-jbossas-ordermgmt-app" targetNamespace="urn:switchyard-quickstart-demo:orders:0.1.0">
+        <sca:service name="OrderService" promote="OrderService/OrderService">
+            <sca:interface.wsdl interface="wsdl/OrderService.wsdl#wsdl.porttype(OrderService)"/>
+            <_1_1:binding.soap>
+                <_1_1:wsdl>wsdl/OrderService.wsdl</_1_1:wsdl>
+                <_1_1:socketAddr>:18001</_1_1:socketAddr>
+                <_1_1:contextPath>demo-orders</_1_1:contextPath>
+            </_1_1:binding.soap>
+        </sca:service>
+        <sca:service name="OrderProcessREST" promote="OrderProcess/OrderProcess">
+            <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderProcess"/>
+            <resteasy:binding.rest name="order-process">
+                <resteasy:interfaces>org.overlord.rtgov.quickstarts.demos.orders.OrderProcess</resteasy:interfaces>
+                <resteasy:contextPath>orders</resteasy:contextPath>
+            </resteasy:binding.rest>
+        </sca:service>
+        <sca:service name="BPMIS" promote="BPMISBean/BPMIS">
+            <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.bpm.BPMIS"/>
+            <resteasy:binding.rest name="BPMIS">
+                <resteasy:interfaces>org.overlord.rtgov.quickstarts.demos.bpm.BPMREST</resteasy:interfaces>
+                <resteasy:contextPath>bpm-rest</resteasy:contextPath>
+            </resteasy:binding.rest>
+        </sca:service>
+        <sca:service name="simpleCorrelationService" promote="simpleCorrelationService/simpleCorrelationService">
+            <_1_1:binding.soap>
+                <_1_1:wsdl>bpel-demo/HelloGoodbye.wsdl</_1_1:wsdl>
+                <_1_1:socketAddr>:18001</_1_1:socketAddr>
+            </_1_1:binding.soap>
+        </sca:service>
+        <sca:component name="OrderService">
+            <_2:implementation.bean class="org.overlord.rtgov.quickstarts.demos.orders.OrderServiceBean" requires="managedTransaction.Global"/>
+            <sca:service name="OrderService" requires="propagatesTransaction">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderService"/>
+            </sca:service>
+            <sca:reference name="InventoryService">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.InventoryService"/>
+            </sca:reference>
+            <sca:reference name="LogisticsService">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.LogisticsService"/>
+            </sca:reference>
+        </sca:component>
+        <sca:component name="LogisticsService">
+            <_2:implementation.bean class="org.overlord.rtgov.quickstarts.demos.orders.LogisticsServiceBean" requires="managedTransaction.Global"/>
+            <sca:service name="LogisticsService" requires="propagatesTransaction">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.LogisticsService"/>
+            </sca:service>
+        </sca:component>
+        <sca:component name="InventoryService">
+            <_2:implementation.bean class="org.overlord.rtgov.quickstarts.demos.orders.InventoryServiceBean" requires="managedTransaction.Global"/>
+            <sca:service name="InventoryService" requires="propagatesTransaction">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.InventoryService"/>
+            </sca:service>
+        </sca:component>
+        <sca:component name="OrderProcess">
+            <bpm:implementation.bpm persistent="true" processId="OrderProcess" requires="managedTransaction.Global">
+                <bpm:manifest>
+                    <bpm:resources>
+                        <bpm:resource location="OrderProcess.bpmn2" type="BPMN2"/>
+                    </bpm:resources>
+                </bpm:manifest>
+                <bpm:operations>
+                    <bpm:operation name="start" type="START_PROCESS">
+                        <bpm:outputs/>
+                    </bpm:operation>
+                </bpm:operations>
+                <bpm:userGroupCallback class="org.overlord.rtgov.quickstarts.demos.bpm.BPMUserGroupCallback"/>
+            </bpm:implementation.bpm>
+            <sca:service name="OrderProcess" requires="propagatesTransaction">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderProcess"/>
+            </sca:service>
+            <sca:reference name="OrderService">
+                <sca:interface.wsdl interface="wsdl/OrderService.wsdl#wsdl.porttype(OrderService)"/>
+            </sca:reference>
+        </sca:component>
+        <sca:component name="BPMISBean">
+            <_2:implementation.bean class="org.overlord.rtgov.quickstarts.demos.bpm.BPMISBean"/>
+            <sca:service name="BPMIS">
+                <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.bpm.BPMIS"/>
+            </sca:service>
+        </sca:component>
+        <sca:component name="simpleCorrelationService">
+            <sca:implementation.bpel process="sh:HelloGoodbye"/>
+            <sca:service name="simpleCorrelationService">
+                <sca:interface.wsdl interface="bpel-demo/HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
+            </sca:service>
+        </sca:component>
+    </sca:composite>
+    <_1:transforms>
+        <_3:transform.java class="org.overlord.rtgov.quickstarts.demos.orders.Transformers" from="java:org.overlord.rtgov.quickstarts.demos.orders.OrderAck" to="{urn:switchyard-quickstart-demo:orders:1.0}submitOrderResponse"/>
+        <_3:transform.java class="org.overlord.rtgov.quickstarts.demos.orders.Transformers" from="java:org.overlord.rtgov.quickstarts.demos.orders.Receipt" to="{urn:switchyard-quickstart-demo:orders:1.0}makePaymentResponse"/>
+        <_3:transform.java class="org.overlord.rtgov.quickstarts.demos.orders.Transformers" from="{urn:switchyard-quickstart-demo:orders:1.0}makePayment" to="java:org.overlord.rtgov.quickstarts.demos.orders.Payment"/>
+        <_3:transform.java class="org.overlord.rtgov.quickstarts.demos.orders.Transformers" from="{urn:switchyard-quickstart-demo:orders:1.0}submitOrder" to="java:org.overlord.rtgov.quickstarts.demos.orders.Order"/>
+    </_1:transforms>
+    <_1:domain>
+        <_1:properties>
+            <_1:property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+        </_1:properties>
+    </_1:domain>
 </_1:switchyard>

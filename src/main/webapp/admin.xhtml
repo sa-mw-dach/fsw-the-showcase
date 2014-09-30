@@ -1,0 +1,81 @@
+<!--
+ - Copyright 2013 Red Hat Inc. and/or its affiliates and other contributors.
+ - 
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ - http://www.apache.org/licenses/LICENSE-2.0
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+        <title>Administrators Desk</title>
+    </head>
+    <body>
+        <div id="content">
+            <h1><a href="/helpdesk/admin.jsf">Administrators Desk</a></h1>
+            <div style="color: red">
+               <h:messages id="messages" globalOnly="false"/>
+            </div>
+            <h:form id="AdminDesk">
+                <table border="0">
+                    <tbody>
+                        <tr valign="top">
+                            <td align="right">Compensation Tasks: </td>
+                            <td>
+                                <h:dataTable value="#{adminDesk.userTasks}" var="task" bgcolor="#F1F1F1" border="10" cellpadding="5" cellspacing="3" dir="ltr" frame="hsides" rules="all">
+                                    <h:column>
+                                        <c:facet name="header">ID</c:facet>
+                                        <h:outputText value="#{task.id}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <c:facet name="header">Name (Status)</c:facet>
+                                        <h:outputText value="#{helpDesk.userTasks[task.processInstanceId].name}"/><p/>
+                                        (<h:outputText value="#{helpDesk.userTasks[task.processInstanceId].status}"/>)
+                                    </h:column>
+                                    <h:column>
+                                        <c:facet name="header">Ticket (status)</c:facet>
+                                        <h:outputText value="#{helpDesk.userTickets[task.processInstanceId].id}"/><p/>
+                                        (<h:outputText value="#{helpDesk.userTickets[task.processInstanceId].status}"/>)
+                                    </h:column>
+                                    <h:column>
+                                        <c:facet name="header">Action</c:facet>
+                                        <h:selectOneMenu value="#{adminDesk.userTickets[task.processInstanceId].status}">
+                                            <c:selectItem itemValue="Restart" itemLabel="Restart Task"/>
+                                            <c:selectItem itemValue="Delegate" itemLabel="Delegate Task"/>
+                                            <c:selectItem itemValue="Skip" itemLabel="Skip Task"/>
+                                            <c:selectItem itemValue="Abort" itemLabel="Abort Process"/>
+                                        </h:selectOneMenu>
+                                    </h:column>
+                                    <h:column>
+                                        <c:facet name="header">Details</c:facet>
+                                        <h:inputTextarea value="#{helpDesk.userTickets[task.processInstanceId].details}" rows="10" cols="40"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <h:commandButton id="submit" value="Submit" action="#{adminDesk.submit}"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </h:form>
+        </div>
+    </body>
+</html>

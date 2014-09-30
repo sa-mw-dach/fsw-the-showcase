@@ -1,7 +1,7 @@
 package org.overlord.rtgov.quickstarts.demos.bpm;
 
-import java.util.List;
-
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.xml.namespace.QName;
 
 import org.kie.api.task.model.TaskSummary;
@@ -9,6 +9,8 @@ import org.switchyard.component.bean.Service;
 import org.switchyard.component.bpm.runtime.BPMTaskService;
 import org.switchyard.component.bpm.runtime.BPMTaskServiceRegistry;
 
+@ManagedBean(name="adminDesk")
+@SessionScoped
 @Service(BPMIS.class)
 public class BPMISBean implements BPMIS {
 
@@ -22,26 +24,6 @@ public class BPMISBean implements BPMIS {
 		for(TaskSummary task : taskRegistry.getTasksAssignedByGroup("users", "en-UK")) {
 			buffer.append("'"+task.getProcessInstanceId()+"',");
 		}			
-		/*
-		for(TaskSummary task : taskRegistry.getActiveTasks()) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}			
-		for(TaskSummary task : taskRegistry.getArchivedTasks()) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}			
-		for(TaskSummary task : taskRegistry.getCompletedTasks()) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}			
-		for(TaskSummary task : taskRegistry.getTasksAssignedAsBusinessAdministrator("kai", "en-UK")) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}			
-		for(TaskSummary task : taskRegistry.getTasksAssignedAsPotentialOwner("kai", "en-UK")) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}			
-		for(TaskSummary task : taskRegistry.getTasksAssignedAsExcludedOwner("kai", "en-UK")) {
-			buffer.append("'"+task.getProcessInstanceId()+"',");
-		}
-		*/
 		if(buffer.length() > 0)
 			buffer.deleteCharAt(buffer.lastIndexOf(","));
 

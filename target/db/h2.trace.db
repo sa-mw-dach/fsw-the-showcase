@@ -1,0 +1,12 @@
+09-30 07:00:57 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "RTGOV_ACTIVITIES" nicht gefunden
+Table "RTGOV_ACTIVITIES" not found; SQL statement:
+alter table RTGOV_ACTIVITIES drop constraint FK_qkn2182qh2hf52txyugoloqaq [42102-168]
+09-30 07:00:57 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "RTGOV_ACTIVITY_CONTEXT" nicht gefunden
+Table "RTGOV_ACTIVITY_CONTEXT" not found; SQL statement:
+alter table RTGOV_ACTIVITY_CONTEXT drop constraint FK_taqus05muupkc8xuuyig97lx7 [42102-168]
+09-30 07:00:57 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "RTGOV_ACTIVITY_PROPERTIES" nicht gefunden
+Table "RTGOV_ACTIVITY_PROPERTIES" not found; SQL statement:
+alter table RTGOV_ACTIVITY_PROPERTIES drop constraint FK_c5src0indd1kbiljcs7ruf2rc [42102-168]
