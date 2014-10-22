@@ -1,0 +1,30 @@
+{
+  "name": "moment-timezone",
+  "description": "Parse and display moments in any timezone.",
+  "version": "0.2.2",
+  "main": "builds/moment-timezone-with-data-2010-2020.js",
+  "dependencies": {
+    "moment": ">= 2.6.0"
+  },
+  "ignore": [
+    "**/.*",
+    "tests",
+    "tasks",
+    "data/*/20*.json",
+    "contributing.md",
+    "Gruntfile.js",
+    "index.js",
+    "package.json"
+  ],
+  "homepage": "https://github.com/moment/moment-timezone",
+  "_release": "0.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.2",
+    "commit": "0b315438cb663727423d65ef49555b9bc2e769f1"
+  },
+  "_source": "git://github.com/moment/moment-timezone.git",
+  "_target": "~0.2.2",
+  "_originalSource": "moment-timezone",
+  "_direct": true
+}

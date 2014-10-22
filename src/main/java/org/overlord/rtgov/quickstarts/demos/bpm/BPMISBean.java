@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.xml.namespace.QName;
 
@@ -14,18 +13,18 @@ import org.switchyard.component.bpm.runtime.BPMTaskService;
 import org.switchyard.component.bpm.runtime.BPMTaskServiceRegistry;
 
 @ManagedBean(name="adminDesk")
-@RequestScoped
+@SessionScoped
 @Service(BPMIS.class)
 public class BPMISBean implements BPMIS {
 
 	private BPMTaskService taskRegistry;
 
-	private List<BPMProcess> processes =  new ArrayList<BPMProcess>();
-	
 	@Override
 	public String getAllTasks() {
-		processes.clear();
+		
 		taskRegistry = BPMTaskServiceRegistry.getTaskService(null, new QName("urn:switchyard-quickstart-demo:orders:0.1.0","OrderProcess"));				
+
+		List<BPMProcess> processes =  new ArrayList<BPMProcess>();
 		
 		StringBuffer buffer = new StringBuffer();
 		for(TaskSummary task : taskRegistry.getTasksAssignedByGroup("users", "en-UK")) {
