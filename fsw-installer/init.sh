@@ -47,7 +47,7 @@ PRJ_DIR=./projects
 PRJ_DTGOVWF=../dtgov-data
 RUNTIME_DIR=$TARGET_DIR/runtime
 
-if [ -x $TARGET_DIR/* ]; then
+if [ "$(ls -A $TARGET_DIR)" ]; then
   read -p "Existing FSW-Installation found ($TARGET_DIR). Delete it <yes|no>? " CONT
   if [ "$CONT" == "yes" ]; then
     echo "  - existing JBoss product install detected and removed..."
