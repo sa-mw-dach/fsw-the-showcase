@@ -183,7 +183,7 @@ echo "=  Start JBoss FSW server:                                                
 echo "=                                                                                         ="
 echo "=    $ $SERVER_BIN_FSW/standalone.sh"
 echo "=  or                                                                                     ="
-echo "=                                                                                         ="
+echo "=    $ $TARGET_DIR/startFSW.sh (if created)"
 echo "=                                                                                         ="
 echo "=  After starting server you need to upload the DTGOV workflows with following command:   ="
 echo "=                                                                                         ="
