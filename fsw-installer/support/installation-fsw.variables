@@ -1,3 +1,4 @@
 fsw.password=jbossfsw1!
 saml.storepass=jbossfsw1!
 vault.keystorepwd=jbossfsw1!
+jbossConsolePwd=jbossfsw1!

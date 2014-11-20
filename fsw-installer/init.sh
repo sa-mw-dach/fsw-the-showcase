@@ -37,6 +37,9 @@ echo "##                                                                ##"
 echo "####################################################################"
 echo
 
+# importing variables
+. ./support/installation-fsw.variables &> /dev/null
+
 command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
 nl=$'\n'
 # make some checks first before proceeding.
@@ -100,22 +103,25 @@ cp $PRJ_DTGOVWF/target/$DTGOVWF $SUPPORT_DIR
 echo "  - copy overlord-rtgov.properties for monitoring rtgov ..."
 cp $SUPPORT_DIR/overlord-rtgov.properties $JBOSS_HOME_FSW/standalone/configuration
 
+echo "  - setting password for console-admin (username: admin) ..."
+$JBOSS_HOME_FSW/bin/add-user.sh -s -dc jboss.standalone.config.dir -u admin -p $jbossConsolePwd
+
 if [ -x "../dist" ]; then
   read -p "  - found a distribution directory (../dist). Should I copy the content to $JBOSS_HOME_FSW/standalone/deployments <yes|no>? " CONT
   if [ "$CONT" == "yes" ]; then
-    echo "  - copy content of ../dist/* to JBOSS_HOME_FSW/standalone/deployments"
+    echo "  - copy content of ../dist/* to $JBOSS_HOME_FSW/standalone/deployments"
     echo
     cp -r ../dist/* $JBOSS_HOME_FSW/standalone/deployments
   fi
 fi
 
-read -p "  - Should I create a start script in here (`pwd`) <yes|no>? " CONT
+read -p "  - Should I create a start script in here ($JBOSS_HOME_FSW) <yes|no>? " CONT
 if [ "$CONT" == "yes" ]; then
-  echo "  - creating a start-script 'startFSW.sh' in `pwd`"
+  echo "  - creating a start-script 'startFSW.sh' in $JBOSS_HOME_FSW"
   echo
-  echo "#!/bin/bash" > startFSW.sh
-  echo "$JBOSS_HOME_FSW/bin/standalone.sh" >> startFSW.sh
-  chmod +x startFSW.sh
+  echo "#!/bin/bash" > ./target/startFSW.sh
+  echo "jboss-eap-6.1/bin/standalone.sh" >> ./target/startFSW.sh
+  chmod +x ./target/startFSW.sh
 fi
 
 read -p "  - Should I start Fuse Service Works now? <yes|no>? " CONT
