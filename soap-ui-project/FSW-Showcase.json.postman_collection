@@ -1,0 +1,52 @@
+{
+	"id": "2920aac8-1d40-407c-a554-13d5f1022050",
+	"name": "FSW-Showcase",
+	"description": "",
+	"order": [
+		"04ae9fa8-8b79-2fea-b8eb-c4286c0fbe69",
+		"24641c89-c2e1-4a87-259f-b8d32703c823"
+	],
+	"folders": [],
+	"timestamp": 1416506031953,
+	"synced": false,
+	"requests": [
+		{
+			"id": "04ae9fa8-8b79-2fea-b8eb-c4286c0fbe69",
+			"headers": "Authorization: Basic ZnN3QWRtaW46Y2hhbmdlMTJfbWUh\n",
+			"url": "http://localhost:8080/bpm-rest/bpm",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "ProcessList",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1416506031953,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "2920aac8-1d40-407c-a554-13d5f1022050",
+			"synced": false
+		},
+		{
+			"id": "24641c89-c2e1-4a87-259f-b8d32703c823",
+			"headers": "Authorization: Basic ZnN3QWRtaW46Y2hhbmdlMTJfbWUh\n",
+			"url": "http://localhost:8080/orders/rest",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Start Process",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1416506113095,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "2920aac8-1d40-407c-a554-13d5f1022050",
+			"synced": false
+		}
+	]
+}
