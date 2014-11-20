@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Build-Timestamp: Wed, 22 Jan 2014 19:09:53 -0500
+Implementation-Title: Design Time Governance: Workflows
+Implementation-Version: 1.0.1.Final-redhat-8
+Os-Version: 2.6.32-431.4.1.el6.x86_64
+Built-By: mockbuild
+Specification-Vendor: JBoss by Red Hat
+Created-By: Apache Maven
+Os-Name: Linux
+Implementation-URL: http://www.jboss.org/jboss-integration-platform-pa
+ rent/ip-parent/dtgov/dtgov-workflows
+Java-Vendor: Oracle Corporation
+Implementation-Vendor: JBoss by Red Hat
+Scm-Revision: 74f75f652e90d184fed6841abf80cee26a717c31
+Implementation-Vendor-Id: org.overlord.dtgov
+Scm-Url: http://github.com/jboss/jboss-parent-pom/jboss-integration-pl
+ atform-parent/ip-parent/dtgov/dtgov-workflows
+Build-Jdk: 1.7.0_51
+Java-Version: 1.7.0_51
+Scm-Connection: scm:git:git@github.com:jboss/jboss-parent-pom.git/jbos
+ s-integration-platform-parent/ip-parent/dtgov/dtgov-workflows
+Os-Arch: amd64
+Specification-Title: Design Time Governance: Workflows
+Specification-Version: 1.0.1.Final-redhat-8
+Archiver-Version: Plexus Archiver
+

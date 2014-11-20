@@ -1,0 +1,6 @@
+s-ramp:connect http://localhost:8080/s-ramp-server admin @@password@@
+s-ramp:upload support/@@dtgov-workflowjar@@ KieJarArchive
+s-ramp:property set maven.groupId org.overlord.dtgov
+s-ramp:property set maven.artifactId dtgov-workflows
+s-ramp:property set maven.version 1.0.1.Final-redhat-8
+s-ramp:updateMetaData
