@@ -96,7 +96,7 @@ Maven -> Update
 
 # B. Walkthrough
 
-## 1. Business scenario scenario
+## 1. Business scenario
 ACME Inc. is one of the leading car part distributors working together with a huge number of retailers. ACME has already implemented the B2B communication with their retailers via Web Service technology. The processing of these B2B order requests is processed in a straight through manner, since ACME has existing contracts with them.
 
 In the future ACME wants to expand their business from a single channel to a multi channel business. In this respect they especially would like to address end consumers via a modern mobile interface. Since this business is rather new for ACME, they are levering business process technology (BPMN) to implement a manual approval process.
