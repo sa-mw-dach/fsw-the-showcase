@@ -32,9 +32,9 @@ This repository includes a ready to use showcase for Red Hat's SOA integration s
 
 ## 2. Installation
 
-### 2.1 Install Red Hat JBoss Fuse Service Works
+### 2.1. Install Red Hat JBoss Fuse Service Works
 
-#### 2.1.1 Download and unzip this project
+#### 2.1.1. Download and unzip this project
 Download https://github.com/kai-wegner/fsw-the-showcase/archive/v0.8.5.zip and unzip it.
 ```
 wget https://github.com/kai-wegner/fsw-the-showcase/archive/v0.8.5.zip
@@ -42,19 +42,21 @@ unzip v0.8.5.zip
 mv fsw-the-showcase-0.8.5 fsw-the-showcase
 ```
 
-#### 2.1.1 _(optional)_ Clone the showcase source code and start the installation script:
+#### 2.1.1. _(optional)_ Clone the showcase source code and start the installation script:
 
 ```
 git clone git@github.com:kai-wegner/fsw-the-showcase.git
 ```
 
-#### 2.1.2 Start the installation script
+#### 2.1.2. Start the installation script
 ```
 cd ./fsw-the-showcase/fsw-installer
 ./init.sh
 ```
+After completing the installation wizard you will have a ready to run Fuse Service Works installation in the following path
+`./fsw-the-showcase/fsw-installer/target`.
 
-#### 2.1.3 Install governance workflow component:
+### 2.2. Install governance workflow component:
 
 ```
 cd ./target
@@ -62,9 +64,7 @@ cd ./target
 ./initDTGov.sh
 ```
 
-
-3.0 After completing the installation wizard you will have a ready to run Fuse Service Works installation in the following path `./fsw-the-showcase/fsw-installer/target`.
-
+### 2.3. Run Fuse Service Works
 
 #### Starting and stopping the server
 You can start the server with the following command (if start script was created): `./target/startFSW.sh`
@@ -84,7 +84,7 @@ BPEL Console | http://localhost:8080/bpel-console/
 **Password**: jbossfsw1!
 
 
-### 2.2 Install Red Hat JBoss Developer Studio
+### 3. Install Red Hat JBoss Developer Studio
 
 1. Install JBoss Developer Studio:
 
@@ -92,19 +92,16 @@ BPEL Console | http://localhost:8080/bpel-console/
 java -jar jboss-devstudio-8.0.0.GA-jar_universal.jar
 ```
 
-### 2.3 Install Soap UI
-
-1. Install Soap UI via the graphical installation wizard.
-
-
-### 2.4 Setup JBDS workspace
+#### 3.1. Setup JBDS workspace
 DRAFT
 Setup JBDS Workspace
 Disable XML Schema Validation
 Maven -> Update
 
+### 4. Install Soap UI
+#### 4.1. Install Soap UI via the graphical installation wizard.
 
-# B. Walkthrough
+# C. Walkthrough
 
 ## 1. Business scenario
 ACME Inc. is one of the leading car part distributors working together with a huge number of retailers. ACME has already implemented the B2B communication with their retailers via Web Service technology. The processing of these B2B order requests is processed in a straight through manner, since ACME has existing contracts with them.
@@ -156,7 +153,7 @@ TBD - Mobile frontend is still under development.
 tbd…
 
 
-# C. Extending the showcase
+# D. Extending the showcase
 
 ## 1. Howto build the Service Works Application
 TODO -  Build “ordermgmt_v0.5.jar.war”
