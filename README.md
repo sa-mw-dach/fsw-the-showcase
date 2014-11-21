@@ -101,6 +101,8 @@ ACME Inc. is one of the leading car part distributors working together with a hu
 
 In the future ACME wants to expand their business from a single channel to a multi channel business. In this respect they especially would like to address end consumers via a modern mobile interface. Since this business is rather new for ACME, they are levering business process technology (BPMN) to implement a manual approval process.
 
+![Business scenario solution outline](./doc/00_solution_outline.png)
+
 ## 2. Show developer view on the scenario
 
 Start JBoss Developer Studio and explain the SwitchYard services:
