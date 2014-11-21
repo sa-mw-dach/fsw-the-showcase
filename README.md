@@ -27,24 +27,34 @@ This repository includes a ready to use showcase for Red Hat's SOA integration s
 1. Download Red Hat JBoss Fuse Service Works at http://www.jboss.org/download-manager/file/jboss-fsw-6.0.0.GA.zip
 2. Download Red Hat JBoss Developer Studio at http://www.jboss.org/download-manager/file/jboss-devstudio-8.0.0.GA-jar_universal.jar
 3. Download Soap UI at http://sourceforge.net/projects/soapui/files/latest/download
-4. Git must be installed on your machine.
+4. You can install Git on your machine to contribute code
 5. Supported Operating Systems: Linux, MacOS
 
 ## 2. Installation
 
 ### 2.1 Install Red Hat JBoss Fuse Service Works
 
-1.0 Clone the showcase source code and start the installation script:
+#### 2.1.1 Download and unzip this project
+Download https://github.com/kai-wegner/fsw-the-showcase/archive/v0.8.5.zip and unzip it.
+```
+wget https://github.com/kai-wegner/fsw-the-showcase/archive/v0.8.5.zip
+unzip v0.8.5.zip
+mv fsw-the-showcase-0.8.5 fsw-the-showcase
+```
+
+#### 2.1.1 _(optional)_ Clone the showcase source code and start the installation script:
 
 ```
 git clone git@github.com:kai-wegner/fsw-the-showcase.git
-cd ./fsw-the-showcase
-git checkout development
-cd ./fsw-installer
+```
+
+#### 2.1.2 Start the installation script
+```
+cd ./fsw-the-showcase/fsw-installer
 ./init.sh
 ```
 
-2.0 Install governance workflow component:
+#### 2.1.3 Install governance workflow component:
 
 ```
 cd ./target
