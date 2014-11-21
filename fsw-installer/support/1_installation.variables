@@ -1,0 +1,7 @@
+TARGET_DIR=./target
+
+PASSWORD=jbossfsw1!
+
+FSW_VERSION=6.0.0
+FSW=jboss-fsw-installer-6.0.0.GA-redhat-4.jar
+DTGOVWF=dtgov-workflows-1.0.1.Final-redhat-8.jar

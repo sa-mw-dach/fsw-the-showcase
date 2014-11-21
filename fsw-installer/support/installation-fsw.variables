@@ -1,0 +1,3 @@
+fsw.password=@@password@@
+saml.storepass=@@password@@
+vault.keystorepwd=@@password@@

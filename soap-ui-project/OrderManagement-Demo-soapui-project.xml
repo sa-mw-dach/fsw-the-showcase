@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="OrderManagement-Demo" resourceRoot="${projectDir}" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="OrderServiceBinding" type="wsdl" bindingName="{urn:switchyard-quickstart-demo:orders:1.0}OrderServiceBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/demo-orders/OrderService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/demo-orders/OrderService?wsdl"><con:part><con:url>http://localhost:8080/demo-orders/OrderService?wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:switchyard-quickstart-demo:orders:1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:switchyard-quickstart-demo:orders:1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema targetNamespace="urn:switchyard-quickstart-demo:orders:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="submitOrder" type="tns:submitOrderType"/>
+      <xs:element name="submitOrderResponse" type="tns:submitOrderResponseType"/>
+      <xs:element name="order" type="tns:orderType"/>
+      <xs:element name="orderAck" type="tns:orderAckType"/>
+      <xs:complexType name="submitOrderType">
+        <xs:sequence>
+          <xs:element name="order" type="tns:orderType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="submitOrderResponseType">
+        <xs:sequence>
+          <xs:element name="orderAck" type="tns:orderAckType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderType">
+        <xs:sequence>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element name="itemId" type="xs:string"/>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element name="customer" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="orderAckType">
+        <xs:sequence>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element name="accepted" type="xs:boolean"/>
+          <xs:element name="status" type="xs:string"/>
+          <xs:element name="customer" type="xs:string"/>
+          <xs:element name="total" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="makePayment" type="tns:makePaymentType"/>
+      <xs:element name="makePaymentResponse" type="tns:makePaymentResponseType"/>
+      <xs:element name="payment" type="tns:paymentType"/>
+      <xs:element name="receipt" type="tns:receiptType"/>
+      <xs:complexType name="makePaymentType">
+        <xs:sequence>
+          <xs:element name="payment" type="tns:paymentType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="makePaymentResponseType">
+        <xs:sequence>
+          <xs:element name="receipt" type="tns:receiptType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="paymentType">
+        <xs:sequence>
+          <xs:element name="customer" type="xs:string"/>
+          <xs:element name="amount" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="receiptType">
+        <xs:sequence>
+          <xs:element name="customer" type="xs:string"/>
+          <xs:element name="amount" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xsd:schema>
+  </types>
+  <message name="submitOrderResponse">
+    <part element="tns:submitOrderResponse" name="parameters"></part>
+  </message>
+  <message name="submitOrder">
+    <part element="tns:submitOrder" name="parameters"></part>
+  </message>
+  <message name="makePayment">
+    <part element="tns:makePayment" name="parameters"></part>
+  </message>
+  <message name="makePaymentResponse">
+    <part element="tns:makePaymentResponse" name="parameters"></part>
+  </message>
+  <portType name="OrderService">
+    <operation name="submitOrder">
+      <input message="tns:submitOrder"></input>
+      <output message="tns:submitOrderResponse"></output>
+    </operation>
+    <operation name="makePayment">
+      <input message="tns:makePayment"></input>
+      <output message="tns:makePaymentResponse"></output>
+    </operation>
+  </portType>
+  <binding name="OrderServiceBinding" type="tns:OrderService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="submitOrder">
+      <soap:operation soapAction="urn:switchyard-quickstart-demo:orders:1.0"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="makePayment">
+      <soap:operation soapAction="urn:switchyard-quickstart-demo:orders:1.0"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="OrderService">
+    <port binding="tns:OrderServiceBinding" name="OrderServicePort">
+      <soap:address location="http://localhost:8080/demo-orders/OrderService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:switchyard-quickstart-demo:orders:1.0" name="makePayment" bindingOperationName="makePayment" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:switchyard-quickstart-demo:orders:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:makePayment>
+         <payment>
+            <customer>?</customer>
+            <amount>?</amount>
+         </payment>
+      </urn:makePayment>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:switchyard-quickstart-demo:orders:1.0"/></con:call></con:operation><con:operation isOneWay="false" action="urn:switchyard-quickstart-demo:orders:1.0" name="submitOrder" bindingOperationName="submitOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:switchyard-quickstart-demo:orders:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:submitOrder>
+         <order>
+            <orderId>?</orderId>
+            <itemId>?</itemId>
+            <quantity>?</quantity>
+            <customer>?</customer>
+         </order>
+      </urn:submitOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:switchyard-quickstart-demo:orders:1.0"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HelloGoodbye1SoapBinding" type="wsdl" bindingName="{http://www.jboss.org/bpel/examples/simple_correlation/}HelloGoodbye1SoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/hello/HelloGoodbye1Service?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/hello/HelloGoodbye1Service?wsdl"><con:part><con:url>http://localhost:8080/hello/HelloGoodbye1Service?wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="http://www.jboss.org/bpel/examples/simple_correlation/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:tns="http://www.jboss.org/bpel/examples/simple_correlation/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.jboss.org/bpel/examples/simple_correlation/" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="sessionIdentity">
+        <sequence>
+          <element name="id" type="xsd:int"/>
+        </sequence>
+      </complexType>
+      <element name="helloMessage">
+        <complexType>
+          <sequence>
+            <element name="sessionId" type="tns:sessionIdentity"/>
+            <element name="parameter" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="goodbyeMessage">
+        <complexType>
+          <sequence>
+            <element name="sessionId" type="tns:sessionIdentity"/>
+            <element name="parameter" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </xsd:schema>
+  </types>
+  <message name="HelloMessage">
+    <part element="tns:helloMessage" name="parameters"></part>
+  </message>
+  <message name="GoodbyeMessage">
+    <part element="tns:goodbyeMessage" name="parameters"></part>
+  </message>
+  <portType name="HelloGoodbye1PortType">
+    <operation name="hello">
+      <input message="tns:HelloMessage" name="HelloIn"></input>
+      <output message="tns:HelloMessage" name="HelloOut"></output>
+    </operation>
+    <operation name="goodbye">
+      <input message="tns:GoodbyeMessage" name="GoodbyeIn"></input>
+      <output message="tns:GoodbyeMessage" name="GoodbyeOut"></output>
+    </operation>
+  </portType>
+  <binding name="HelloGoodbye1SoapBinding" type="tns:HelloGoodbye1PortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="goodbye">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="HelloGoodbye1Service">
+    <port binding="tns:HelloGoodbye1SoapBinding" name="HelloGoodbye1Port">
+      <soap:address location="http://localhost:8080/hello/HelloGoodbye1Service"/>
+    </port>
+  </service>
+  <plnk:partnerLinkType name="HelloGoodbye1PartnerLinkType">
+    <plnk:role name="me" portType="tns:HelloGoodbye1PortType"/>
+    <plnk:role name="you" portType="tns:HelloGoodbye1PortType"/>
+  </plnk:partnerLinkType>
+  <vprop:property name="SessionID" type="xsd:int"/>
+  <vprop:propertyAlias messageType="tns:HelloMessage" part="parameters" propertyName="tns:SessionID">
+    <vprop:query>tns:sessionId/tns:id</vprop:query>
+  </vprop:propertyAlias>
+  <vprop:propertyAlias messageType="tns:GoodbyeMessage" part="parameters" propertyName="tns:SessionID">
+    <vprop:query>tns:sessionId/tns:id</vprop:query>
+  </vprop:propertyAlias>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/hello/HelloGoodbye1Service</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="goodbye" bindingOperationName="goodbye" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/hello/HelloGoodbye1Service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sim="http://www.jboss.org/bpel/examples/simple_correlation/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sim:goodbyeMessage>
+         <sim:sessionId>
+            <sim:id>?</sim:id>
+         </sim:sessionId>
+         <sim:parameter>?</sim:parameter>
+      </sim:goodbyeMessage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.jboss.org/bpel/examples/simple_correlation/HelloGoodbye1PortType/goodbyeRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="hello" bindingOperationName="hello" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/HelloGoodbyeService/HelloGoodbyeService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sim="http://www.jboss.org/bpel/examples/simple_correlation/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sim:helloMessage>
+         <sim:sessionId>
+            <sim:id>MeineInstanz</sim:id>
+         </sim:sessionId>
+         <sim:parameter>ABC</sim:parameter>
+      </sim:helloMessage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.jboss.org/bpel/examples/simple_correlation/HelloGoodbye1PortType/helloRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="OrderServiceBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="makePayment TestCase" searchProperties="true" id="d2eb52cf-934c-4bfc-bbc0-9fb5da0a8235"><con:settings/><con:testStep type="request" name="makePayment"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderServiceBinding</con:interface><con:operation>makePayment</con:operation><con:request name="makePayment"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:switchyard-quickstart-demo:orders:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:makePayment>
+         <payment>
+            <customer>Fred</customer>
+            <amount>400</amount>
+         </payment>
+      </urn:makePayment>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:switchyard-quickstart-demo:orders:1.0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="submitOrder TestCase" searchProperties="true" id="df051b9d-b766-426e-a65b-ab67a151d60e"><con:settings/><con:testStep type="request" name="submitOrder-Butter-Valid"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderServiceBinding</con:interface><con:operation>submitOrder</con:operation><con:request name="submitOrder-Butter-Valid"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:switchyard-quickstart-demo:orders:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:submitOrder>
+         <order>
+            <orderId>1</orderId>
+            <itemId>BUTTER</itemId>
+            <quantity>100</quantity>
+            <customer>Fred</customer>
+         </order>
+      </urn:submitOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:switchyard-quickstart-demo:orders:1.0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="submitOrder-NotAvailable"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderServiceBinding</con:interface><con:operation>submitOrder</con:operation><con:request name="submitOrder-NotAvailable"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:switchyard-quickstart-demo:orders:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:submitOrder>
+         <order>
+            <orderId>2</orderId>
+            <itemId>Laptop</itemId>
+            <quantity>100</quantity>
+            <customer>Fred</customer>
+         </order>
+      </urn:submitOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="submitOrder-JAM-Valid-SLA_Violation"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderServiceBinding</con:interface><con:operation>submitOrder</con:operation><con:request name="submitOrder-JAM-Valid-SLA_Violation"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <orders:submitOrder xmlns:orders="urn:switchyard-quickstart-demo:orders:1.0">
+         <order>
+            <orderId>3</orderId>
+            <itemId>JAM</itemId>
+            <quantity>100</quantity>
+            <customer>Fred</customer>
+         </order>
+      </orders:submitOrder>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="submitOrder-Butter-Joe"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderServiceBinding</con:interface><con:operation>submitOrder</con:operation><con:request name="submitOrder-Butter-Joe"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/demo-orders/OrderService</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <orders:submitOrder xmlns:orders="urn:switchyard-quickstart-demo:orders:1.0">
+            <order>
+                <orderId>4</orderId>
+                <itemId>BUTTER</itemId>
+                <quantity>100</quantity>
+            	<customer>Joe</customer>
+            </order>
+        </orders:submitOrder>
+    </soap:Body>
+</soap:Envelope>
+]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings/><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

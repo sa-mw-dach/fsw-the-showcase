@@ -46,6 +46,9 @@
           </bpm:operation>
         </bpm:operations>
         <bpm:userGroupCallback class="org.overlord.rtgov.quickstarts.demos.bpm.BPMUserGroupCallback"/>
+        <bpm:workItemHandlers>
+          <bpm:workItemHandler class="org.overlord.rtgov.quickstarts.demos.bpm.TestWorkItemHandler" name="testItemHandler"/>
+        </bpm:workItemHandlers>
       </bpm:implementation.bpm>
       <sca:service name="OrderProcess" requires="propagatesTransaction">
         <sca:interface.java interface="org.overlord.rtgov.quickstarts.demos.orders.OrderProcess"/>
@@ -76,14 +79,14 @@
     </sca:service>
     <sca:service name="simpleCorrelationService" promote="simpleCorrelationService/simpleCorrelationService">
       <_1_1:binding.soap>
-        <_1_1:wsdl>HelloGoodbye.wsdl</_1_1:wsdl>
+        <_1_1:wsdl>bpel-demo/HelloGoodbye.wsdl</_1_1:wsdl>
         <_1_1:socketAddr>:18001</_1_1:socketAddr>
       </_1_1:binding.soap>
     </sca:service>
     <sca:component name="simpleCorrelationService">
       <sca:implementation.bpel process="sh:HelloGoodbye"/>
       <sca:service name="simpleCorrelationService">
-        <sca:interface.wsdl interface="HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
+        <sca:interface.wsdl interface="bpel-demo/HelloGoodbye.wsdl#wsdl.porttype(HelloGoodbyePortType)"/>
       </sca:service>
     </sca:component>
   </sca:composite>
@@ -95,7 +98,7 @@
   </_1:transforms>
   <_1:domain>
     <_1:properties>
-      <_1:property name="org.switchyard.handlers.messageTrace.enabled" value="true"/>
+      <_1:property name="org.switchyard.handlers.messageTrace.enabled" value="false"/>
     </_1:properties>
   </_1:domain>
 </_1:switchyard>
