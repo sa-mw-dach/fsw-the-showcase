@@ -38,9 +38,7 @@ This repository includes a ready to use showcase for Red Hat's SOA integration s
 
 ```
 git clone git@github.com:kai-wegner/fsw-the-showcase.git
-cd ./fsw-the-showcase
-git checkout development
-cd ./fsw-installer
+cd ./fsw-the-showcase/fsw-installer
 ./init.sh
 ```
 
